@@ -9,7 +9,10 @@
 			"ppa": true,
 			"version": "os-provided"
 		}
-	}
+	},
+	// https://stackoverflow.com/questions/71795804/pipeline-keeps-giving-error-spawn-ps-enoent
+	// without this it cannot re-start the api after a file change, probably using tsc --watch flag as in the post above
+	"postCreateCommand": "apt-get update && apt-get -y install procps"
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

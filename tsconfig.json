@@ -19,5 +19,10 @@
     "noFallthroughCasesInSwitch": false,
     // to be able to import version from package.json 
     "resolveJsonModule": true
+  },
+  // https://stackoverflow.com/a/77001961
+  // this was needed that it starts to detect file changes inside Dev Container
+  "watchOptions": {
+    "watchFile": "fixedPollingInterval"
   }
 }
