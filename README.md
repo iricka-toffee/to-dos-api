@@ -1,13 +1,19 @@
 # to-dos-api
 
 It is a fake in-memory ToDos API for this [UI](https://github.com/TourmalineCore/to-dos-ui) that demonstrates a Test-Driven Development approach on how to develop a React web app using MobX and Cypress.  
+It contains setup for development inside of VSCode Dev Containers (just Dev Containers from now on) or without it.
 
 ## Prerequisites
 
-- [Docker](https://www.docker.com/get-started/) (needed for VSCode Dev Containers)
-- [VSCode](https://code.visualstudio.com/) (optional but highly recommended due to its Dev Containers)
-- [VSCode Dev Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-- [Node.js](https://nodejs.org/en) (version 20.11.1 was used but it should be also fine with some older versions)
+### If you develop inside Dev Containers
+- [Docker](https://www.docker.com/get-started/)
+- [VSCode](https://code.visualstudio.com/)
+- [Dev Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+### If you develop using good old Node.js (no Dev Containers)
+
+- [Node.js](https://nodejs.org/en) (version 20.11.1 was used but it should be also fine with some older versions, ideally install using `nvm` which will allow you to easily switch between Node.js versions if needed)
+- [VSCode](https://code.visualstudio.com/) (optional, you can use any IDE but VSCode has configured formatting on save by the lint rules of the project)
 
 ## Start
 
