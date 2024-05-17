@@ -5,6 +5,7 @@ node_modules
 .devcontainer
 .vscode
 .github
+ci
 
 # root level files
 .dockerignore
