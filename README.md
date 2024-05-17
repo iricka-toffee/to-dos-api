@@ -31,3 +31,14 @@ npm run lint
 ```
 
 >Note: this is a NestJS Api that was bootstrapped using these [guidelines](https://docs.nestjs.com/first-steps).
+
+## Docker Build
+
+```bash
+docker build -t to-dos-api .
+```
+
+## Docker Local Run
+```bash
+docker run --publish 5005:5005 --rm -t to-dos-api
+```

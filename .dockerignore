@@ -1,0 +1,17 @@
+# root level folders
+.git
+dist
+node_modules
+.devcontainer
+.vscode
+.github
+
+# root level files
+.dockerignore
+.eslintrc.js
+.gitattributes
+.gitignore
+.prettierrc
+Dockerfile
+LICENSE
+README.md
