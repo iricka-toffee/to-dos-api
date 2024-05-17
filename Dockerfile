@@ -23,6 +23,8 @@ RUN npm ci --omit=dev
 
 COPY --from=build /dist /dist
 
-EXPOSE 5005
+ENV PORT=80
+
+EXPOSE 80
 
 CMD node dist/src/main.js

@@ -17,9 +17,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api/to-dos-api')
 
   const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('api', app, document)
+  SwaggerModule.setup('api/to-dos-api/api', app, document)
 
-  await app.listen(5005)
+  await app.listen(process.env.PORT || 5005)
 }
 
 bootstrap()

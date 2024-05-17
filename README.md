@@ -40,5 +40,5 @@ docker build -t to-dos-api .
 
 ## Docker Local Run
 ```bash
-docker run --publish 5005:5005 --rm -t to-dos-api
+docker run --publish 5005:80 --rm -t to-dos-api
 ```
