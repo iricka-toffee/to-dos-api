@@ -13,6 +13,9 @@ async function bootstrap() {
     .setDescription('API to manage your ToDo items')
     .setVersion(version)
     .build()
+
+  app.setGlobalPrefix('api/to-dos-api')
+
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document)
 
