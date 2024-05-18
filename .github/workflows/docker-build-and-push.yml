@@ -9,7 +9,7 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Publish Docker image
+name: Publish Docker image & Deploy to Prod
 
 on:
   push:
@@ -17,8 +17,8 @@ on:
       - feature/docker
 
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  push_to_registry_and_deploy:
+    name: Push Docker image to Docker Hub & Deploy to Prod
     runs-on: ubuntu-22.04
     permissions:
       packages: write
@@ -56,3 +56,18 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      
+      - name: Create kubeconfig file
+        run: |
+          cd $HOME
+          mkdir .kube
+          echo "${{ secrets.TO_DOS_PROD_KUBECONFIG }}" > .kube/config
+
+      - name: Deploy
+        uses: helmfile/helmfile-action@v1.9.0
+        with:
+          helmfile-version: 'v0.164.0'
+          helm-version: 'v3.14.4'
+          helmfile-args: apply --namespace prod -f ci/helmfile.yaml
+          helmfile-auto-init: "false"
+    

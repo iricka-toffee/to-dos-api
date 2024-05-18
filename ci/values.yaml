@@ -38,6 +38,7 @@ service:
 
 ingress:
   enabled: true
+  hostname: "to-dos.tourmalinecore.com"
   path: /api/to-dos-api(/|$)(.*)
   annotations:
     # to do not redirect from http to https
