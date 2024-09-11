@@ -35,21 +35,19 @@ service:
   type: ClusterIP
   ports:
     http: 80
+    https: ""
 
 ingress:
   enabled: true
   hostname: "to-dos.tourmalinecore.com"
   path: /api/to-dos-api(/|$)(.*)
   annotations:
-    # to do not redirect from http to https
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    # redirect from http to https
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/rewrite-target: /api/to-dos-api/$2
   ingressClassName: "nginx"
-  tls: false
-
-# no https
-tls: 
-  enabled: false
+  tls: true
 
 # not needed in this setup
 serviceAccount:
