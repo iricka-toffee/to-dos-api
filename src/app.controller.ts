@@ -38,7 +38,7 @@ class CompleteToDosRequest {
   toDoIds: number[]
 }
 
-@Controller('to-dos-api')
+@Controller('to-dos')
 export class AppController {
   // eslint-disable-next-line prettier/prettier
   constructor(private readonly toDosService: ToDosService) { }
@@ -47,14 +47,14 @@ export class AppController {
     description: 'ToDo items',
     type: ToDosResponse,
   })
-  @Get('to-dos')
+  @Get()
   getToDos() {
     return {
       toDos: this.toDosService.getToDos(),
     }
   }
 
-  @Post('to-dos')
+  @Post()
   @ApiOkResponse({
     description: 'Created ToDo ID',
     type: NewToDoResponse,
@@ -69,7 +69,7 @@ export class AppController {
     }
   }
 
-  @Post('to-dos/complete')
+  @Post('complete')
   completeToDos(@Body() { toDoIds = [] }: CompleteToDosRequest) {
     toDoIds.forEach((toDoId) =>
       this.toDosService.completeToDo({
@@ -78,7 +78,7 @@ export class AppController {
     )
   }
 
-  @Delete('to-dos')
+  @Delete()
   @ApiQuery({
     name: 'toDoId',
     type: Number,
