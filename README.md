@@ -3,6 +3,8 @@
 It is a fake in-memory ToDos API for this [UI](https://github.com/TourmalineCore/to-dos-ui) that demonstrates a Test-Driven Development approach on how to develop a React web app using MobX and Cypress.  
 It contains setup for development inside of VSCode Dev Containers (just Dev Containers from now on) or without it.
 
+More info about the project and its related repos can be found here: [to-dos-documentation](https://github.com/TourmalineCore/to-dos-documentation).
+
 ## Prerequisites
 
 ### If you develop inside Dev Containers
