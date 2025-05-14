@@ -44,3 +44,5 @@ docker build -t to-dos-api .
 ```bash
 docker run --publish 5005:80 --rm -t to-dos-api
 ```
+
+Проверка синхронизации: Artem, 14 мая
