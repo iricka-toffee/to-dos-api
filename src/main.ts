@@ -7,6 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
   app.enableCors()
+  app.setGlobalPrefix('api')
 
   const config = new DocumentBuilder()
     .setTitle('ToDos API')
@@ -14,12 +15,10 @@ async function bootstrap() {
     .setVersion(version)
     .build()
 
-  app.setGlobalPrefix('api/to-dos-api')
-
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api/to-dos-api/api', app, document)
 
-  await app.listen(process.env.PORT || 5005)
+  await app.listen(3000, '0.0.0.0') // <-- убедись, что тут порт 3000 и host 0.0.0.0
 }
 
 bootstrap()

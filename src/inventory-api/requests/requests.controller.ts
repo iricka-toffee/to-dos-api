@@ -8,7 +8,8 @@ class NewRequestDto {
 export class RequestsController {
   @Post('for-employee')
   create(@Body() body: NewRequestDto) {
-    if (!body.type) {
+    console.log('BODY:', body)
+    if (!body || !body.type) {
       return { message: 'type is required' }
     }
     return {
