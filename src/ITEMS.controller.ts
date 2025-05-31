@@ -12,7 +12,7 @@ class RequestItemResponse {
   newDescriptionId: number
 }
 
-@Controller('/request-item/requests/me')
+@Controller('/api/request-item/requests/me')
 export class ItemController {
   constructor(private readonly requestItemService: RequestItemService) { }
 
