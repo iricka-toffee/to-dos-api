@@ -1,91 +1,90 @@
 import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common'
 import { ApiOkResponse, ApiProperty, ApiQuery } from '@nestjs/swagger'
-import { ToDosService } from './to-dos.service'
+import { RequestFormService } from './request-item.service'
 
-class ToDo {
+class Request {
   @ApiProperty()
   id: number
 
   @ApiProperty()
-  name: string
+  maxPrice: number
 }
 
-class ToDosResponse {
+class RequestsResponse {
   @ApiProperty({
     isArray: true,
-    type: ToDo,
+    type: Request,
   })
-  toDos: ToDo[]
+  requests: Request[]
 }
 
-class NewToDoRequest {
+class NewRequestFormRequest {
   @ApiProperty()
-  name: string
+  maxPrice: number
 }
 
-class NewToDoResponse {
+class NewRequestFormResponse {
   @ApiProperty({
     type: Number,
   })
-  newToDoId: number
+  newRequestId: number
 }
 
-class CompleteToDosRequest {
+class CompleteRequestsRequest {
   @ApiProperty({
     isArray: true,
     type: Number,
   })
-  toDoIds: number[]
+  requestIds: number[]
 }
 
-@Controller('to-dos')
+@Controller('request-item')
 export class AppController {
-  // eslint-disable-next-line prettier/prettier
-  constructor(private readonly toDosService: ToDosService) { }
+  constructor(private readonly requestFormService: RequestFormService) {}
 
   @ApiOkResponse({
-    description: 'ToDo items',
-    type: ToDosResponse,
+    description: 'Request items',
+    type: RequestsResponse,
   })
   @Get()
-  getToDos() {
+  getRequests() {
     return {
-      toDos: this.toDosService.getToDos(),
+      requests: this.requestFormService.getRequests(),
     }
   }
 
   @Post()
   @ApiOkResponse({
-    description: 'Created ToDo ID',
-    type: NewToDoResponse,
+    description: 'Created Request ID',
+    type: NewRequestFormResponse,
   })
-  addToDo(@Body() { name }: NewToDoRequest) {
-    const { newToDoId } = this.toDosService.addToDo({
-      name,
-    })
+  addRequest(@Body() { maxPrice }: NewRequestFormRequest) {
+    const { newRequestId } = this.requestFormService.addRequest(
+      maxPrice,
+      )
 
     return {
-      newToDoId,
+      newRequestId,
     }
   }
 
   @Post('complete')
-  completeToDos(@Body() { toDoIds = [] }: CompleteToDosRequest) {
-    toDoIds.forEach((toDoId) =>
-      this.toDosService.completeToDo({
-        id: toDoId,
-      }),
+  completeRequests(@Body() { requestIds = [] }: CompleteRequestsRequest) {
+    requestIds.forEach((requestId) =>
+      this.requestFormService.addRequest( 
+       requestId,
+      ),
     )
   }
 
   @Delete()
   @ApiQuery({
-    name: 'toDoId',
+    name: 'requestId',
     type: Number,
   })
-  deleteToDo(@Query('toDoId') toDoId: string) {
-    this.toDosService.completeToDo({
-      id: Number(toDoId),
-    })
+  deleteRequest(@Query('requestId') requestId: number) {
+    this.requestFormService.addRequest(
+     requestId
+    )
   }
 }

@@ -1,66 +1,39 @@
 import { Injectable } from '@nestjs/common'
 
-type ToDo = {
+type Request = {
   id: number
-  name: string
+  maxPrice: number
 }
 
 @Injectable()
-export class ToDosService {
-  private readonly _toDos = [
-    {
-      id: 1,
-      name: 'Listen to this Workshop',
-    },
-    {
-      id: 2,
-      name: 'Read TDD book',
-    },
-    {
-      id: 3,
-      name: 'Read Mobx & React basic docs',
-    },
-    {
-      id: 4,
-      name: 'Explore Cypress',
-    },
+export class RequestFormService {
+  private readonly _requests: Request[] = []
+  private _nextRequestId = 1
 
-    {
-      id: 5,
-      name: 'Pitch to your colleagues',
-    },
-    {
-      id: 6,
-      name: 'Use and improve',
-    },
-  ]
-
-  private _nextToDoId = 7
-
-  getToDos(): ToDo[] {
-    return this._toDos
+  getRequests(): Request[] {
+    return this._requests
   }
 
-  addToDo({ name }) {
-    const newToDoId = this._nextToDoId
+  addRequest({ maxPrice }: { maxPrice: number }) {
+    const newRequestId = this._nextRequestId
 
-    this._toDos.push({
-      id: newToDoId,
-      name,
+    this._requests.push({
+      id: newRequestId,
+      maxPrice,
     })
 
-    this._nextToDoId++
+    this._nextRequestId++
 
-    return {
-      newToDoId,
+    return { 
+      newRequestId,
     }
   }
 
-  completeToDo({ id }) {
-    const toDoIndex = this._toDos.findIndex((toDo) => toDo.id === id)
+  completeRequest({ id }: { id: number }) {
+    const index = this._requests.findIndex((request) => request.id === id)
 
-    if (toDoIndex !== -1) {
-      this._toDos.splice(toDoIndex, 1)
+    if (index !== -1) {
+      this._requests.splice(index, 1)
     }
   }
 }

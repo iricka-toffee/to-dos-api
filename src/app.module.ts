@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
-import { ToDosService } from './to-dos.service'
-import { InventoryApiModule } from './inventory-api/inventory-api.module'
+import { RequestFormService } from './request-item.service'
+import { RequestItemModule } from './request-item/request-item.module'
 
 @Module({
-  imports: [
-    InventoryApiModule,
-  ],
+  imports: [RequestItemModule],
   controllers: [AppController],
-  providers: [ToDosService],
+  providers: [RequestFormService],
 })
-// eslint-disable-next-line prettier/prettier
-export class AppModule { }
+export class AppModule {}

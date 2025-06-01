@@ -1,24 +1,21 @@
-import { NestFactory } from '@nestjs/core'
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import { AppModule } from './app.module'
-import { version } from '../package.json'
+import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { AppModule } from './app.module';
+import { version } from '../package.json';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule);
 
-  app.enableCors()
-  app.setGlobalPrefix('api')
+  app.enableCors();
 
   const config = new DocumentBuilder()
-    .setTitle('ToDos API')
-    .setDescription('API to manage your ToDo items')
-    .setVersion(version)
-    .build()
+    .setTitle('To-Dos API')
+    .setDescription('API documentation')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
-  const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('api/to-dos-api/api', app, document)
-
-  await app.listen(3000, '0.0.0.0') // <-- убедись, что тут порт 3000 и host 0.0.0.0
+  await app.listen(3000);
 }
-
-bootstrap()
+bootstrap();
